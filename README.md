@@ -6,18 +6,44 @@ Install-Package DifyAI
 ```
 
 ## 注册
+
+### 单实例
 ```csharp
-services
-    .AddDifyAI(x =>
-    {
-        x.BaseDomain = "http://127.0.0.1/v1";
-        x.DefaultApiKey = "app-xxxxxxxxxxxxxxxx";
-    });
+services.AddDifyAIService(x =>
+{
+    x.BaseDomain = "http://127.0.0.1/v1";
+    x.DefaultApiKey = "app-xxxxxxxxxxxxxxxx";
+});
+```
+
+### 多实例（通过工厂）
+```csharp
+services.AddDifyAIService("app1", x =>
+{
+    x.BaseDomain = "http://127.0.0.1/v1";
+    x.DefaultApiKey = "app-xxxxxxxxxxxxxxxx";
+});
+
+services.AddDifyAIService("app2", x =>
+{
+    x.BaseDomain = "http://127.0.0.1/v1";
+    x.DefaultApiKey = "app-yyyyyyyyyyyyyyyy";
+});
 ```
 
 ## 使用
+
+### 单实例
 ```csharp
 private readonly IDifyAIService _difyAIService;
+```
+
+### 多实例（通过工厂）
+```csharp
+private readonly IDifyAIServiceFactory _difyAIServiceFactory;
+
+// 根据名称获取对应实例
+var service = _difyAIServiceFactory.CreateService("app1");
 ```
 
 ### 聊天助手、Agent 应用消息、工作流编排对话型应用

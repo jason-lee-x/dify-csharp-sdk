@@ -1,5 +1,9 @@
 # 更新历史
 
+## 3.13.0
+- 新增：支持多实例注册，新增 `AddDifyAIService(string name, Action<DifyAIOptions> configure)` 重载方法
+- 新增：`IDifyAIServiceFactory` 接口，可通过 `CreateService(name)` 按名称获取对应的 `IDifyAIService` 实例
+
 ## 3.12.1
 - 新增：文件上传支持直接使用 Stream，`IUploadRequest` 接口新增 `FileStream` 属性，`UploadAsAsync` 和 `UploadDocumentAsync` 方法现在可以接受文件流或文件路径，无需先保存到磁盘 [#39](https://github.com/BitBrewing/dify-csharp-sdk/issues/39)
 
