@@ -149,5 +149,58 @@ namespace DifyAI.Interfaces
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<DatasetGetTextEmbeddingModelsResponse> GetTextEmbeddingModelsAsync(DatasetGetTextEmbeddingModelsRequest request, CancellationToken cancellationToken = default);
+
+        #region Dataset metadata
+        /// <summary>
+        /// Get all metadata for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<DatasetMetadataListResponse> GetDatasetMetadataListAsync(DatasetMetadataListRequest request, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get all built-in metadata fields
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<DatasetMetadataBuiltInListResponse> GetDatasetMetadataBuiltInListAsync(DatasetMetadataListRequest request, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Create metadata for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<DatasetMetadataCreateResponse> CreateDatasetMetadataAsync(DatasetMetadataCreateRequest request, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Update metadata name for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<DatasetMetadataCreateResponse> UpdateDatasetMetadataAsync(DatasetMetadataUpdateRequest request, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Delete metadata for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task DeleteDatasetMetadataAsync(DatasetMetadataDeleteRequest request, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Update metadata for multiple documents
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task UpdateDocumentsMetadataAsync(DocumentMetadataUpdateRequest request, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Enable or disable built-in metadata field for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task ActionDatasetMetadataBuiltInFieldAsync(DatasetMetadataBuiltInActionRequest request, CancellationToken cancellationToken = default);
+
+        #endregion
     }
 }
