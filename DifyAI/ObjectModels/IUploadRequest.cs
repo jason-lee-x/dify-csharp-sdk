@@ -19,5 +19,10 @@ namespace DifyAI.ObjectModels
         /// 要上传的文件流(与 File 选其一)
         /// </summary>
         Stream FileStream { get; }
+
+        /// <summary>
+        /// 要上传的文件名（使用文件流上传，且文件流非FileStream类型时必需指定文件名）
+        /// </summary>
+        string FileName { get; }
     }
 }

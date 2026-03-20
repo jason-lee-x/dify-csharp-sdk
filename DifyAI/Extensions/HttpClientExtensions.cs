@@ -312,28 +312,36 @@ namespace DifyAI
             string fileName;
             string mimeType;
             bool shouldDisposeStream = false;
-            
+
             // 优先使用 FileStream，如果没有则使用 File 路径
             if (requestModel.FileStream != null)
             {
                 fileStream = requestModel.FileStream;
-                // 尝试从流中获取文件名，如果是 FileStream 类型
                 if (fileStream is FileStream fs)
                 {
-                    fileName = Path.GetFileName(fs.Name);
-                    mimeType = MimeUtility.GetMimeMapping(fs.Name);
+                    //优先从参数中获取文件名，如果没有则从 FileStream 中获取
+                    if (!string.IsNullOrWhiteSpace(requestModel.FileName)) fileName = requestModel.FileName;
+                    else fileName = Path.GetFileName(fs.Name);
+
+                    mimeType = MimeUtility.GetMimeMapping(fileName);
                 }
                 else
                 {
-                    // 如果不是 FileStream，使用默认文件名
-                    fileName = "document";
+                    // 从参数中获取文件名，如果没有则报错
+                    if (!string.IsNullOrWhiteSpace(requestModel.FileName)) fileName = requestModel.FileName;
+                    else throw new ArgumentException("FileName must be provided");
+
                     mimeType = "application/octet-stream";
                 }
             }
             else if (!string.IsNullOrEmpty(requestModel.File))
             {
                 fileStream = File.OpenRead(requestModel.File);
-                fileName = Path.GetFileName(requestModel.File);
+
+                //优先从参数中获取文件名，如果没有则从 FileStream 中获取
+                if (!string.IsNullOrWhiteSpace(requestModel.FileName)) fileName = requestModel.FileName;
+                else fileName = Path.GetFileName(requestModel.File);
+
                 mimeType = MimeUtility.GetMimeMapping(requestModel.File);
                 shouldDisposeStream = true;
             }
