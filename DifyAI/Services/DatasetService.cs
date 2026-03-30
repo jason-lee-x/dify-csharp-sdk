@@ -250,5 +250,145 @@ namespace DifyAI.Services
                 UseDefaultApiKey();
             }
         }
+
+        #region Dataset Metadata
+
+        /// <summary>
+        /// Get all metadata for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<DatasetMetadataListResponse> GetDatasetMetadataListAsync(DatasetMetadataListRequest request, CancellationToken cancellationToken = default)
+        {
+            UseDatasetApiKey();
+            try
+            {
+                return await _httpClient.GetAsAsync<DatasetMetadataListResponse>($"datasets/{request.DatasetId}/metadata", request, cancellationToken);
+            }
+            finally
+            {
+                UseDefaultApiKey();
+            }
+        }
+
+        /// <summary>
+        /// Get all built-in metadata fields
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<DatasetMetadataBuiltInListResponse> GetDatasetMetadataBuiltInListAsync(DatasetMetadataListRequest request, CancellationToken cancellationToken = default)
+        {
+            UseDatasetApiKey();
+            try
+            {
+                return await _httpClient.GetAsAsync<DatasetMetadataBuiltInListResponse>($"datasets/{request.DatasetId}/metadata/built-in", request, cancellationToken);
+            }
+            finally
+            {
+                UseDefaultApiKey();
+            }
+        }
+
+        /// <summary>
+        /// Create metadata for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<DatasetMetadataCreateResponse> CreateDatasetMetadataAsync(DatasetMetadataCreateRequest request, CancellationToken cancellationToken = default)
+        {
+            UseDatasetApiKey();
+            try
+            {
+                return await _httpClient.PostAsAsync<DatasetMetadataCreateResponse>($"datasets/{request.DatasetId}/metadata", request, cancellationToken);
+            }
+            finally
+            {
+                UseDefaultApiKey();
+            }
+        }
+
+        /// <summary>
+        /// Update metadata name for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<DatasetMetadataCreateResponse> UpdateDatasetMetadataAsync(DatasetMetadataUpdateRequest request, CancellationToken cancellationToken = default)
+        {
+            UseDatasetApiKey();
+            try
+            {
+                return await _httpClient.PatchAsAsync<DatasetMetadataCreateResponse>($"datasets/{request.DatasetId}/metadata/{request.MetadataId}", request, cancellationToken);
+            }
+            finally
+            {
+                UseDefaultApiKey();
+            }
+        }
+
+
+
+        /// <summary>
+        /// Delete metadata for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task DeleteDatasetMetadataAsync(DatasetMetadataDeleteRequest request, CancellationToken cancellationToken = default)
+        {
+            UseDatasetApiKey();
+            try
+            {
+                await _httpClient.DeleteAsync($"datasets/{request.DatasetId}/metadata/{request.MetadataId}", request, cancellationToken);
+            }
+            finally
+            {
+                UseDefaultApiKey();
+            }
+        }
+
+        /// <summary>
+        /// Update metadata for multiple documents
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task UpdateDocumentsMetadataAsync(DocumentMetadataUpdateRequest request, CancellationToken cancellationToken = default)
+        {
+            UseDatasetApiKey();
+            try
+            {
+                await _httpClient.PostAsync($"datasets/{request.DatasetId}/documents/metadata", request, cancellationToken);
+            }
+            finally
+            {
+                UseDefaultApiKey();
+            }
+        }
+
+        /// <summary>
+        /// Enable or disable built-in metadata field for a dataset
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task ActionDatasetMetadataBuiltInFieldAsync(DatasetMetadataBuiltInActionRequest request, CancellationToken cancellationToken = default)
+        {
+            UseDatasetApiKey();
+            try
+            {
+                await _httpClient.PostAsync($"datasets/{request.DatasetId}/metadata/built-in/{request.Action}", request, cancellationToken);
+            }
+            finally
+            {
+                UseDefaultApiKey();
+            }
+        }
+
+        #endregion
+
     }
 }
