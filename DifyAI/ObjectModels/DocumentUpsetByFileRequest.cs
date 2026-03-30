@@ -25,6 +25,12 @@ namespace DifyAI.ObjectModels
         public Stream FileStream { get; set; }
 
         /// <summary>
+        /// 指定上传的文件名（使用文件流上传，且文件流非FileStream时必需指定文件名）
+        /// </summary>
+        [JsonIgnore]
+        public string FileName { get; set; }
+
+        /// <summary>
         ///     Source document ID (optional)
         ///     Used to re-upload the document or modify the document cleaning and segmentation configuration.The missing information is copied from the source document
         ///     The source document cannot be an archived document
