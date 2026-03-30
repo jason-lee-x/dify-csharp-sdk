@@ -1,5 +1,9 @@
 # 更新历史
 
+## 3.14.0
+- 修复：当 `FileStream` 参数类型为 `MemoryStream` 时上传失败的问题，`IUploadRequest` 接口新增 `FileName` 属性，支持上传时指定文件名（贡献者 [@journey191](https://github.com/journey191)，PR [#44](https://github.com/BitBrewing/dify-csharp-sdk/pull/44)）
+- 新增：知识库元数据相关接口（贡献者 [@journey191](https://github.com/journey191)，PR [#42](https://github.com/BitBrewing/dify-csharp-sdk/pull/42)）
+
 ## 3.13.0
 - 新增：支持多实例注册，新增 `AddDifyAIService(string name, Action<DifyAIOptions> configure)` 重载方法
 - 新增：`IDifyAIServiceFactory` 接口，可通过 `CreateService(name)` 按名称获取对应的 `IDifyAIService` 实例
